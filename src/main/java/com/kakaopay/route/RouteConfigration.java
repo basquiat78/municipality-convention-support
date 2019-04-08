@@ -2,6 +2,7 @@ package com.kakaopay.route;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.web.reactive.function.server.RequestPredicates.PATCH;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,8 +33,11 @@ public class RouteConfigration implements WebFluxConfigurer {
     @Bean
     public RouterFunction<ServerResponse> municipalitySupportRoutes(MunicipalitySupportHandler municipalitySupportHandler) {
         return RouterFunctions.route(GET("/api/v1/municipalitys/support"), municipalitySupportHandler::getMunicipalitySupportList)
+        					  .andRoute(GET("/api/v1/municipalitys/support/entity"), municipalitySupportHandler::getMunicipalitySupportEntityList)
 		        			  .andRoute(GET("/api/v1/municipalitys/support/withpage"), municipalitySupportHandler::getMunicipalitySupportListWithPaging)
-		        			  .andRoute(GET("/api/v1/municipalitys/support/name"), municipalitySupportHandler::findByMunicipalityName);
+		        			  .andRoute(GET("/api/v1/municipalitys/support/name"), municipalitySupportHandler::getByMunicipalityName)
+		        			  .andRoute(PATCH("/api/v1/municipalitys/support"), municipalitySupportHandler::updateByMunicipalityName)
+		        			  .andRoute(GET("/api/v1/municipalitys/limits/{count}"), municipalitySupportHandler::getByMunicipalitySupportDesc);
     }
 	
     /**

@@ -105,8 +105,15 @@ public class MunicipalityService {
 		return Mono.just("File Upload Completed");
 	}
 	
+	/**
+	 * find All
+	 * 
+	 * 데이터 확인을 위한...
+	 * 
+	 * @return Flux<Municipality>
+	 */
 	public Flux<Municipality> findAll() {
 		return Flux.fromIterable(municipalityRepository.findAll());
 	}
-	
+
 }

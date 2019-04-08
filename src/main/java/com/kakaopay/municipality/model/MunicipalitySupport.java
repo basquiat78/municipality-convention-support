@@ -9,12 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -61,7 +61,6 @@ public class MunicipalitySupport {
 	private String municipalityCode;
 	
 	@Transient
-	@JsonProperty("region")
 	private String municipalityName;
 	
 	/**
@@ -113,5 +112,21 @@ public class MunicipalitySupport {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
+	
+	/**
+	 * insert할때 현재 시간으로 인서트한다.
+	 */
+    @PrePersist
+    protected void setUpCreatedAt() {
+    	createdAt = new Date();
+    }
+
+    /**
+     * update 이벤트가 발생시에 업데이트된 시간으로 update
+     */
+    @PreUpdate
+    protected void onUpdate() {
+    	updatedAt = new Date();
+    }
 	
 }

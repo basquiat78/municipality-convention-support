@@ -13,6 +13,9 @@ import com.kakaopay.municipality.model.MunicipalitySupport;
  * created by basquiat
  *
  */
-public interface MunicipalitySupportRepository extends JpaRepository<MunicipalitySupport, String> {
+public interface MunicipalitySupportRepository extends JpaRepository<MunicipalitySupport, Long> {
+	
+	MunicipalitySupport findById(long id);
+	
 	List<MunicipalitySupport> findByMunicipalityMunicipalityNameContaining(String municipalityName);
 }

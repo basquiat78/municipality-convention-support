@@ -12,5 +12,4 @@ import com.kakaopay.municipality.model.Municipality;
  *
  */
 public interface MunicipalityRepository extends JpaRepository<Municipality, String> {
-
 }

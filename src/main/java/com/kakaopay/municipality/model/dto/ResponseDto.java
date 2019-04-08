@@ -23,6 +23,11 @@ import lombok.RequiredArgsConstructor;
 public class ResponseDto {
 	
 	/**
+	 * unique id
+	 */
+	private long id;
+	
+	/**
 	 * 지차체 명
 	 */
 	private String municipalityName;

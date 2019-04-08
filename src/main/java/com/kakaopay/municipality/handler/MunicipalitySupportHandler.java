@@ -8,6 +8,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import com.kakaopay.municipality.model.MunicipalitySupport;
+import com.kakaopay.municipality.model.dto.MunicipalityNamesDto;
 import com.kakaopay.municipality.model.dto.ResponseDto;
 import com.kakaopay.municipality.service.MunicipalitySupportService;
 import com.kakaopay.util.PageCheckUtil;
@@ -33,6 +34,15 @@ public class MunicipalitySupportHandler {
 	 * @param request
 	 * @return Mono<ServerResponse>
 	 */
+	public Mono<ServerResponse> getMunicipalitySupportEntityList(ServerRequest request) {
+		return ServerResponse.ok().contentType(APPLICATION_JSON).body(municipalitySupportService.findAllWithEntity(), MunicipalitySupport.class);
+	}
+	
+	/**
+	 * paging처리 없이 MunicipalitySupport 가져오기
+	 * @param request
+	 * @return Mono<ServerResponse>
+	 */
 	public Mono<ServerResponse> getMunicipalitySupportList(ServerRequest request) {
 		return ServerResponse.ok().contentType(APPLICATION_JSON).body(municipalitySupportService.findAllWithoutPaging(), ResponseDto.class);
 	}
@@ -52,10 +62,26 @@ public class MunicipalitySupportHandler {
 	 * @param request
 	 * @return Mono<ServerResponse>
 	 */
-	public Mono<ServerResponse> findByMunicipalityName(ServerRequest request) {
+	public Mono<ServerResponse> getByMunicipalityName(ServerRequest request) {
 		Flux<ResponseDto> flux = request.bodyToFlux(MunicipalitySupport.class)
 												.flatMap(municipalitySupport -> municipalitySupportService.findByMunicipalityName(municipalitySupport.getMunicipalityName()));
 		return ServerResponse.ok().contentType(APPLICATION_JSON).body(flux, ResponseDto.class);
+	}
+	
+	/**
+	 * update MunicipalitySupport
+	 * @param request
+	 * @return Mono<ServerResponse>
+	 */
+	public Mono<ServerResponse> updateByMunicipalityName(ServerRequest request) {
+		Mono<ResponseDto> mono = request.bodyToMono(MunicipalitySupport.class)
+									    .flatMap(municipalitySupport -> municipalitySupportService.updateMunicipalitySupportById(municipalitySupport));
+		return ServerResponse.ok().contentType(APPLICATION_JSON).body(mono, ResponseDto.class);
+	}
+	
+	public Mono<ServerResponse> getByMunicipalitySupportDesc(ServerRequest request) {
+		Mono<MunicipalityNamesDto> mono = municipalitySupportService.findByMunicipalitySupportDesc(Integer.valueOf(request.pathVariable("count")));
+		return ServerResponse.ok().contentType(APPLICATION_JSON).body(mono, MunicipalityNamesDto.class);
 	}
 	
 }
