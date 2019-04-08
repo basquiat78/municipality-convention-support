@@ -1,0 +1,41 @@
+#spring  setup and common configuration
+spring:
+  profiles:
+    active: local
+
+---
+
+spring:
+  freemarker:
+    charset: UTF-8
+    check-template-location: true
+    enabled: true
+    suffix: .ftl
+    template-loader-path: classpath:/templates
+  profiles: local
+  jpa:
+    hibernate.ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+files:
+  upload:
+    dir: files/
+
+#logging
+logging:
+  file: logs/local-log.log
+  level:
+    root: INFO
+    org:
+      springframework:
+        web: INFO
+  pattern:
+    # console에 찍히는 로그 형식 정의
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    # console에서 로그는 위에 형식으로 찍히지만 파일로 씌여질 때 해당 패턴으로 찍는다. 
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
