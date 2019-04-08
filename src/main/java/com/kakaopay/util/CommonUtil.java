@@ -120,7 +120,7 @@ public class CommonUtil {
 			return CurrencyType.valueOf(amountString).calculate(0);
 		}
 		String unit = amountString.replaceAll("[^ㄱ-힣]", ""); //<-- 뒤에 한글만
-		if(unit.contains("이내")) {
+		if(unit.contains("이내")) { // 어라...50억이내...이런 넘이 딱 하나 있네...이것떄문에 if써야하니??
 			unit = unit.replace("이내", "");
 		}
 		
@@ -136,7 +136,7 @@ public class CommonUtil {
 	 */
 	public static double calculateRate(String rate) {
 		// 1. 대출이자 전액인 넘을 먼저 처리하자.
-		if(rate.indexOf("전액") > 1) {
+		if(rate.contains("전액")) {
 			return Double.valueOf(100);
 		}
 		
@@ -155,29 +155,29 @@ public class CommonUtil {
 		return averageRate;
 	}
 	
-	public static void main(String[] args) {
-		
-		String a = "추천금액";
-		System.out.println(a.contains("추천금액"));
-		
-		String rateString1 = "3%~3.6%";
-		String rateString2 = "10%~12%";
-		String rateString3 = "10%~15%";
-		String rateString4 = "10%~16%";
-		String rateString5 = "6.8%";
-		String rateString6 = "대출이자 전액";
-
-		System.out.println(CommonUtil.calculateRate(rateString1));
-		System.out.println(CommonUtil.calculateRate(rateString2));
-		System.out.println(CommonUtil.calculateRate(rateString3));
-		System.out.println(CommonUtil.calculateRate(rateString4));
-		System.out.println(CommonUtil.calculateRate(rateString5));
-		System.out.println(CommonUtil.calculateRate(rateString6));
-	
-		String amountString = "10억원";
-		System.out.println(amountString.replaceAll("[^ㄱ-힣]", "")); // <-- 뒤에 한글만
-		System.out.println(amountString.replaceAll("[^0-9]", "")); // <-- 숫자만
-		
-	}
-	
+//	public static void main(String[] args) {
+//		
+//		String a = "추천금액";
+//		System.out.println(a.contains("추천금액"));
+//		
+//		String rateString1 = "3%~3.6%";
+//		String rateString2 = "10%~12%";
+//		String rateString3 = "10%~15%";
+//		String rateString4 = "10%~16%";
+//		String rateString5 = "6.8%";
+//		String rateString6 = "대출이자 전액";
+//
+//		System.out.println(CommonUtil.calculateRate(rateString1));
+//		System.out.println(CommonUtil.calculateRate(rateString2));
+//		System.out.println(CommonUtil.calculateRate(rateString3));
+//		System.out.println(CommonUtil.calculateRate(rateString4));
+//		System.out.println(CommonUtil.calculateRate(rateString5));
+//		System.out.println(CommonUtil.calculateRate(rateString6));
+//	
+//		String amountString = "10억원";
+//		System.out.println(amountString.replaceAll("[^ㄱ-힣]", "")); // <-- 뒤에 한글만
+//		System.out.println(amountString.replaceAll("[^0-9]", "")); // <-- 숫자만
+//		
+//	}
+//	
 }
