@@ -46,7 +46,7 @@ public class MunicipalitySupportService {
 	 * 
 	 * not paging
 	 * 
-	 * @return Flux<MunicipalitySupport>
+	 * @return Flux<ResponseDto>
 	 */
 	public Flux<ResponseDto> findAllWithoutPaging() {
 		return Flux.fromIterable(CommonUtil.convertMunicipalitySupportListFromEntity(municipalitySupportRepository.findAll()));
@@ -57,7 +57,7 @@ public class MunicipalitySupportService {
 	 * with paging
 	 * 
 	 * @param pageable
-	 * @return Flux<MunicipalitySupport>
+	 * @return Flux<ResponseDto>
 	 */
 	public Flux<ResponseDto> findAllWithPaging(Pageable pageable) {
 		return Flux.fromIterable(CommonUtil.convertMunicipalitySupportListFromEntity(municipalitySupportRepository.findAll(pageable).stream().collect(Collectors.toList())));
@@ -72,7 +72,7 @@ public class MunicipalitySupportService {
 	 * 따라서 리스트로 받아치자!
 	 * 
 	 * @param municipalityName
-	 * @return
+	 * @return Flux<ResponseDto>
 	 */
 	public Flux<ResponseDto> findByMunicipalityName(String municipalityName) {
 		return Flux.fromIterable(CommonUtil.convertMunicipalitySupportListFromEntity(municipalitySupportRepository.findByMunicipalityMunicipalityNameContaining(municipalityName)));

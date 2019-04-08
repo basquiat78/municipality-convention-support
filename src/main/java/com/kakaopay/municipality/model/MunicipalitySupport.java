@@ -24,7 +24,9 @@ import lombok.RequiredArgsConstructor;
 /**
  * 
  * 
- * csv 파일의 데이터는 분명 @OneToOne 하지만 나중을 위해 @ManyToOne으로 구조를 가져간다.
+ * csv 파일의 데이터는 분명 @OneToOne
+ * 
+ * 일단 oneToOne...
  * 
  * created by basquiat
  *

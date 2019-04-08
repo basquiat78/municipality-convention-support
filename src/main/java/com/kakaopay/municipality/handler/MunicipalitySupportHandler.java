@@ -48,7 +48,7 @@ public class MunicipalitySupportHandler {
 	}
 	
 	/**
-	 * find by region
+	 * find by MunicipalityName
 	 * @param request
 	 * @return Mono<ServerResponse>
 	 */

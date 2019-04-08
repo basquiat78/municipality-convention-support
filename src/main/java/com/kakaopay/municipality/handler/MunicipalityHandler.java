@@ -61,10 +61,4 @@ public class MunicipalityHandler {
 		return ServerResponse.ok().contentType(APPLICATION_JSON).body(municipalityInfoService.findAll(), Municipality.class);
 	}
 	
-//
-//	public Mono<ServerResponse> getEcoInfoByRegion(ServerRequest request) {
-//		Mono<EcologicalInformation> mono = request.bodyToMono(EcologicalInformation.class).flatMap(ecoInfo -> ecoInfoService.getEcoInfoByResion(ecoInfo.getRegion())).onErrorResume(throwable -> Mono.just(new EcologicalInformation()));
-//		return ServerResponse.ok().contentType(APPLICATION_JSON).body(mono, EcologicalInformation.class);
-//	}
-	
 }
