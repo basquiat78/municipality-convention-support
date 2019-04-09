@@ -48,6 +48,8 @@ create, update (과제엔 주어지지 않았지만)인해 MunicipalitySupport�
 
 [http://localhost:8080/view/upload](http://localhost:8080/view/upload)
 
+뷰에서 해당 파일을 선택하고 업로드하는 형식을 취하고 있다.
+
 테스트 코드를 위해서 관련 파일은 프로젝트 내부의 testfiles에 저장함
 
 ## 2. 지원하는 지자체 목록 검색 API
