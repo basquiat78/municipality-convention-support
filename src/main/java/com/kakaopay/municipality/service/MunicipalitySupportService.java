@@ -178,10 +178,11 @@ public class MunicipalitySupportService {
 																			}).collect(Collectors.groupingBy(RecommandInstituteDto::getMinRate));
 		// key로 정렬하기 위해서 다음과 같은 작업을 하자...
 		// TreeMap은 기본적으로 key값을 오른차순으로..
+		// findFirst로 첫번째 요소만 조회하고 최종 소비로 끝내자
 		Map<Double, List<RecommandInstituteDto>> treeMap = new TreeMap<Double, List<RecommandInstituteDto>>(map);
 		String recommandInstitutes = treeMap.values().stream()
 													 .map(list -> list.stream().map(recommandInstitute -> recommandInstitute.getRecommandInstitute()).collect(Collectors.joining(", ")) )
-													 .findAny().orElse("");
+													 .findFirst().orElse("");
 	
 		return Mono.just(RecommandInstitutesDto.builder().recommandInstitutes(recommandInstitutes).build());
 		
