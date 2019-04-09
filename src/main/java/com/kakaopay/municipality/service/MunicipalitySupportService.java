@@ -172,8 +172,8 @@ public class MunicipalitySupportService {
 													
 																			double minRate = CommonUtil.getMinRate(municipalitySupport.getRate());
 																			return RecommandInstituteDto.builder()
-																									 .recommandInstitute(municipalitySupport.getRecommandInstitute())
-																									 .minRate(minRate).build();
+																										.recommandInstitute(municipalitySupport.getRecommandInstitute())
+																										.minRate(minRate).build();
 			
 																			}).collect(Collectors.groupingBy(RecommandInstituteDto::getMinRate));
 		// key로 정렬하기 위해서 다음과 같은 작업을 하자...
