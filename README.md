@@ -62,4 +62,14 @@ queryParam을 아무것도 주지 않으면 기본적으로 page=1&size=10로 �
 
 without pagin [http://localhost:8080/api/v1/municipalitys/support](http://localhost:8080/api/v1/municipalitys/support)
 
+## 3. 지원하는 지자체명을 입력 받아 해당 지자체의 지원정보를 출력하는 API 
 
+입출력은 json으로 하기 때문에 일반적인 get방식으로 테스트하기 힘들다.
+
+RESTful API url을 예를 들면 http://localhost:8080/api/v1/municipalitys/{name} 처럼 날리면 좋겠지만 조건에 의해 get방식이지만 json을 입력으로 할려면 Postman같은 툴을 사용하는 방법으로 테스트함.
+
+### 3.1 Usage
+
+[http://localhost:8080/api/v1/municipalitys/support/name](/api/v1/municipalitys/support/name)
+
+![실행이미지](https://github.com/basquiat78/municipality-convention-support/blob/master/img/2.PNG)
