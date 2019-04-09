@@ -37,6 +37,16 @@
 조건에 의해 지자체 코드와 명을 갖는 Municipality와 나머지 정보를 갖는 MunicipalitySupport로 나눈다.    
 사실 데이터를 보면 OneToOne으로 구성되어 있어서 심플하게 OneToOne구성을 함. (이것은 변경될 수 있다고 봐야한다. 왜냐하면 하나의 지자체가 여러개의 MunicipalitySupport을 가질 수 있음을 언제나 고려해야한다.)     
 
-양방향 vs 단방향?
+### 1.2 지자체 코드 생성
+
+딱히 주어진 것이 없으니 개발자 임의대로 만드는 듯 하여 반복을 하면서 preFix로 'region'를 붙이고 index와 중복될 수 있는 3자리 난수를 조합해서 사용한다.     
+> e.g regino1215    
+
+create, update (과제엔 주어지지 않았지만)인해 MunicipalitySupport이 Municipality와의 연관관계에서 주인이 되어야 하니 OneToOne은 MunicipalitySupport쪽에 걸어두고  MunicipalitySupport정보에 Municipality정보를 담아서 List로 반환하고 saveAll를 통해 전체 데이터를 저장한다.    
+
+### Usage
+
+[http://localhost:8080/view/upload](http://localhost:8080/view/upload)
+
 
 
