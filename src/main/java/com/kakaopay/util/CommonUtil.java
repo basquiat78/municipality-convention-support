@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -100,11 +101,7 @@ public class CommonUtil {
 	 * @return String
 	 */
 	public static String numberGen(int length) {
-		String randomString = "";
-		for(int i=0; i<length; i++) {
-			randomString += new Random().ints(1, 10).findAny().getAsInt();
-		}
-		return randomString;
+		return IntStream.range(0, length).mapToObj(mapper -> new Random().ints(1, 10).findAny().getAsInt()+"").collect(Collectors.joining(""));
 	}
 	
 	/**
@@ -120,7 +117,7 @@ public class CommonUtil {
 			return CurrencyType.valueOf(amountString).calculate(0);
 		}
 		String unit = amountString.replaceAll("[^ㄱ-힣]", ""); //<-- 뒤에 한글만
-		if(unit.contains("이내")) { // 어라...50억이내...이런 넘이 딱 하나 있네...이것떄문에 if써야하니??
+		if(unit.contains("이내")) { // 어라...'50억이내'...이런 넘이 딱 하나 있네...이것떄문에 if써야하니??
 			unit = unit.replace("이내", "");
 		}
 		

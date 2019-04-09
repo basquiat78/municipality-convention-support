@@ -16,49 +16,31 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CsvDto {
 
-	/**
-	 * id
-	 */
+	/** id */
 	private long id;
 	
-	/**
-	 * 지자체 코드
-	 */
+	/** 지자체 명 */
 	private String municipalityName;
 	
-	/**
-	 * 지원 대상
-	 */
+	/** 지원 대상 */
 	private String supportTarget;
 	
-	/**
-	 * 용도
-	 */
+	/** 용도 */
 	private String usage;
 	
-	/**
-	 * 지원 한도
-	 */
+	/** 지원 한도 */
 	private String supportLimit;
 	
-	/**
-	 * 2차 보전
-	 */
+	/** 2차 보전 */
 	private String rate;
 	
-	/**
-	 * 추천기관
-	 */
+	/** 추천기관 */
 	private String recommandInstitute;
 	
-	/**
-	 * 관리점
-	 */
+	/** 관리점 */
 	private String management;
 	
-	/**
-	 * 취급점
-	 */
+	/** 취급점 */
 	private String reception;
 	
 }

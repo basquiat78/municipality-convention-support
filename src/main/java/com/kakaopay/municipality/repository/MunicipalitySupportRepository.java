@@ -17,5 +17,10 @@ public interface MunicipalitySupportRepository extends JpaRepository<Municipalit
 	
 	MunicipalitySupport findById(long id);
 	
+	/**
+	 * like 검색을 우아하고 아름답고 간지나게....
+	 * @param municipalityName
+	 * @return List<MunicipalitySupport>
+	 */
 	List<MunicipalitySupport> findByMunicipalityMunicipalityNameContaining(String municipalityName);
 }

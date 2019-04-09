@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 /**
  * 
@@ -21,10 +20,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class MunicipalityNamesDto {
 	
-	/**
-	 * 지차체 명들
-	 */
-	@Setter
+	/** 지차체 명들 */
 	private String municipalityNames;
 	
 }

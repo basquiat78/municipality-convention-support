@@ -31,17 +31,13 @@ public class Municipality {
 
 	/**
 	 * 지자체 코드
-	 * 
 	 * 자동 생성이 아닌 어느 특정 패턴으로 넣을 것이다.
-	 * 
 	 */
 	@Id
 	@Column(name = " municipality_id")
 	private String municipalityCode;
 	
-	/**
-	 * 지자체 명
-	 */
+	/** 지자체 명 */
 	@Column(name = "municipality_name")
 	private String municipalityName;
 

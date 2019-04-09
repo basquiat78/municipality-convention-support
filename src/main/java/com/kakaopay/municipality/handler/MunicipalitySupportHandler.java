@@ -30,7 +30,8 @@ public class MunicipalitySupportHandler {
 	private  MunicipalitySupportService municipalitySupportService;
 	
 	/**
-	 * paging처리 없이 MunicipalitySupport 가져오기
+	 * paging처리 없이 MunicipalitySupport를 Entity형식으로 전부 가져오기
+	 * 업데이트, 같은 경웨 생성일, 수정일을 체크하기 위한 체크용
 	 * @param request
 	 * @return Mono<ServerResponse>
 	 */
@@ -53,8 +54,7 @@ public class MunicipalitySupportHandler {
 	 * @return Mono<ServerResponse>
 	 */
 	public Mono<ServerResponse> getMunicipalitySupportListWithPaging(ServerRequest request) {
-		Flux<ResponseDto> flux = municipalitySupportService.findAllWithPaging(PageCheckUtil.setUpPageRequest(request));
-		return ServerResponse.ok().contentType(APPLICATION_JSON).body(flux, ResponseDto.class);
+		return ServerResponse.ok().contentType(APPLICATION_JSON).body(municipalitySupportService.findAllWithPaging(PageCheckUtil.setUpPageRequest(request)), ResponseDto.class);
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class MunicipalitySupportHandler {
 	 */
 	public Mono<ServerResponse> getByMunicipalityName(ServerRequest request) {
 		Flux<ResponseDto> flux = request.bodyToFlux(MunicipalitySupport.class)
-												.flatMap(municipalitySupport -> municipalitySupportService.findByMunicipalityName(municipalitySupport.getMunicipalityName()));
+										.flatMap(municipalitySupport -> municipalitySupportService.findByMunicipalityName(municipalitySupport.getMunicipalityName()));
 		return ServerResponse.ok().contentType(APPLICATION_JSON).body(flux, ResponseDto.class);
 	}
 	
@@ -73,12 +73,17 @@ public class MunicipalitySupportHandler {
 	 * @param request
 	 * @return Mono<ServerResponse>
 	 */
-	public Mono<ServerResponse> updateByMunicipalityName(ServerRequest request) {
+	public Mono<ServerResponse> updateMunicipalitySupport(ServerRequest request) {
 		Mono<ResponseDto> mono = request.bodyToMono(MunicipalitySupport.class)
 									    .flatMap(municipalitySupport -> municipalitySupportService.updateMunicipalitySupportById(municipalitySupport));
 		return ServerResponse.ok().contentType(APPLICATION_JSON).body(mono, ResponseDto.class);
 	}
 	
+	/**
+	 * 지원 한도, 이차 보전율 조건 검색
+	 * @param request
+	 * @return Mono<ServerResponse>
+	 */
 	public Mono<ServerResponse> getByMunicipalitySupportDesc(ServerRequest request) {
 		Mono<MunicipalityNamesDto> mono = municipalitySupportService.findByMunicipalitySupportDesc(Integer.valueOf(request.pathVariable("count")));
 		return ServerResponse.ok().contentType(APPLICATION_JSON).body(mono, MunicipalityNamesDto.class);

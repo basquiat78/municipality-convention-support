@@ -17,7 +17,7 @@ import com.kakaopay.municipality.handler.ViewHandler;
 
 /**
  * 
- * route 관련 bean은 api, view을 나눠서 작성한다.
+ * route 관련 bean은 api부분과 view을 나눠서 작성한다.
  * 
  * created by basquiat
  *
@@ -36,24 +36,24 @@ public class RouteConfigration implements WebFluxConfigurer {
         					  .andRoute(GET("/api/v1/municipalitys/support/entity"), municipalitySupportHandler::getMunicipalitySupportEntityList)
 		        			  .andRoute(GET("/api/v1/municipalitys/support/withpage"), municipalitySupportHandler::getMunicipalitySupportListWithPaging)
 		        			  .andRoute(GET("/api/v1/municipalitys/support/name"), municipalitySupportHandler::getByMunicipalityName)
-		        			  .andRoute(PATCH("/api/v1/municipalitys/support"), municipalitySupportHandler::updateByMunicipalityName)
+		        			  .andRoute(PATCH("/api/v1/municipalitys/support"), municipalitySupportHandler::updateMunicipalitySupport)
 		        			  .andRoute(GET("/api/v1/municipalitys/limits/{count}"), municipalitySupportHandler::getByMunicipalitySupportDesc);
     }
 	
     /**
 	 * Municipipality을 위한 route
-	 * @param municipality
+	 * @param municipalityHandler
 	 * @return RouterFunction<ServerResponse>
 	 */
     @Bean
     public RouterFunction<ServerResponse> municipalityRoutes(MunicipalityHandler municipalityHandler) {
         return RouterFunctions.route(POST("/api/v1/upload"), municipalityHandler::upload)
-        					  .andRoute(GET("/api/v1/municipalityinfos"), municipalityHandler::getMunicipalityoList);
+        					  .andRoute(GET("/api/v1/municipalityinfos"), municipalityHandler::getMunicipalityoList); // <-- test용
     }
     
 	/**
 	 * view단을 위한 route
-	 * @param uploadViewHandler
+	 * @param viewHandler
 	 * @return RouterFunction<ServerResponse>
 	 */
     @Bean

@@ -21,9 +21,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * 
- * MunicipalityService에서 직접적으로 MunicipalityRepository를 DI하지 말고
- * 
- * Service를 통해서 액션을 취하는 형식으로 가기 위해서 Service를 따로 둔다.
+ * MunicipalitySupportService
  * 
  * created by basquiat
  *
@@ -48,6 +46,7 @@ public class MunicipalitySupportService {
 	
 	/**
 	 * show native entity
+	 * 정보 확인을 위한 테스트 용도
 	 * @return Flux<MunicipalitySupport>
 	 */
 	public Flux<MunicipalitySupport> findAllWithEntity() {
@@ -67,7 +66,8 @@ public class MunicipalitySupportService {
 	/**
 	 * 
 	 * with paging
-	 * 
+	 * 실제로 WebFlux가 아닌 방식에서는 pageable이 먹히지만 여기선 되지 않아서 실제 다른 방법을 보면 Dto를 통해서 반환하게 되어 있다.
+	 * 심플하게 가자...
 	 * @param pageable
 	 * @return Flux<ResponseDto>
 	 */
@@ -79,10 +79,8 @@ public class MunicipalitySupportService {
 	 * search municipalitySupport with municipalityName
 	 * 
 	 * like 검색으로
-	 * 
-	 * oneToone이지만 만일 '충청'으로 검색하게 되면 리스트로 나오게 된다.
+	 * '충청'으로 검색하게 되면 리스트로 나오게 된다.
 	 * 따라서 리스트로 받아치자!
-	 * 
 	 * @param municipalityName
 	 * @return Flux<ResponseDto>
 	 */
@@ -101,7 +99,7 @@ public class MunicipalitySupportService {
 		MunicipalitySupport selectedMunicipalitySupport = municipalitySupportRepository.findById(municipalitySupport.getId());
 		
 		municipalitySupport.setMunicipality(selectedMunicipalitySupport.getMunicipality());
-		municipalitySupport.setCreatedAt(selectedMunicipalitySupport.getCreatedAt());
+		municipalitySupport.setCreatedAt(selectedMunicipalitySupport.getCreatedAt()); // 이거 안하면 null??? 다른 아름다운 방법을 찾기 전까지는...
 		System.out.println(municipalitySupport);
 		municipalitySupportRepository.save(municipalitySupport);
 		log.info("update completed");
@@ -116,7 +114,7 @@ public class MunicipalitySupportService {
 	 * 2. 지원한도가 만일 같다면 이차 보전을 체크하는데 이것은 반대로 작은 넘부터 즉 올림차순의 조건을 갖아야 한다. 복잡하네???
 	 * 
 	 * @param count
-	 * @return
+	 * @return Mono<MunicipalityNamesDto>
 	 */
 	public Mono<MunicipalityNamesDto> findByMunicipalitySupportDesc(int count) {
 
@@ -137,6 +135,7 @@ public class MunicipalitySupportService {
 															    double averageRate = CommonUtil.calculateRate(municipalitySupport.getRate().trim());
 																return MunicipalityNameDto.builder()
 																						  // Law Of Demeter 어기는건데????????
+																						  // TODO : entitiy내부에서 name으로 바로 반환하게 수정한다.
 																						  .municipalityName(municipalitySupport.getMunicipality().getMunicipalityName())
 																						  .amount(amount)
 																						  .averageRateLimit(averageRate)

@@ -27,7 +27,7 @@ public class PageCheckUtil {
 	 * 
 	 * 깔끔하진 않지만  ServerRequest로부터 queryParam를 체크한다.
 	 * 만일 queryParam을 날리지 않았다면 기본적인 page, size를 체크해서 Pageable로 리턴한다.
-	 * 
+	 * 좀더 아름다운 방법을 찾거나 스프링 진영에서 해결해 주거나...
 	 * @param request
 	 * @return Pageable
 	 */

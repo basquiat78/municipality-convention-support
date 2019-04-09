@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * 
- * Upload View Handler
+ * View Handler
  * 
  * 업로드할 화면을 보여주기 위한 Handler
  * 

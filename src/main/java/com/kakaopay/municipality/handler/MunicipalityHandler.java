@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * 
- * MunicipalityInformation 정보를 처리하기 위한 핸들러
+ * Municipality 정보를 처리하기 위한 핸들러
  * 
  * created by basquiat
  *
@@ -26,7 +26,7 @@ import reactor.core.publisher.Mono;
 public class MunicipalityHandler {
 
 	@Autowired
-	private  MunicipalityService municipalityInfoService;
+	private  MunicipalityService municipalityService;
 
 	/**
 	 * 
@@ -42,7 +42,7 @@ public class MunicipalityHandler {
 		 *    - ErrorDescription에 정보를 담아서 보낸다.
 		 */
 		return request.body(BodyExtractors.toMultipartData()).flatMap(multiValueMap -> {
-																				Mono<String> mono = municipalityInfoService.readCsvFileAndSave(multiValueMap);
+																				Mono<String> mono = municipalityService.readCsvFileAndSave(multiValueMap);
 																				return ServerResponse.ok().contentType(APPLICATION_JSON).body(mono, String.class);
 																			 })
 															 .onErrorResume(throwable ->
@@ -53,12 +53,13 @@ public class MunicipalityHandler {
     }
 	
 	/**
-	 * MunicipalityInformation 가져오기
+	 * Municipality 가져오기
+	 * 테스트용
 	 * @param request
 	 * @return Mono<ServerResponse>
 	 */
 	public Mono<ServerResponse> getMunicipalityoList(ServerRequest request) {
-		return ServerResponse.ok().contentType(APPLICATION_JSON).body(municipalityInfoService.findAll(), Municipality.class);
+		return ServerResponse.ok().contentType(APPLICATION_JSON).body(municipalityService.findAll(), Municipality.class);
 	}
 	
 }
