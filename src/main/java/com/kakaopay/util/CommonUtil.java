@@ -128,7 +128,7 @@ public class CommonUtil {
 	/**
 	 * 이차보전에 대한 값을 구한다.
 	 * 단일일수도 있고 아닐수도 있고...전액일수도 있고...
-	 * @param rateString
+	 * @param rate
 	 * @return double
 	 */
 	public static double calculateRate(String rate) {
@@ -152,6 +152,31 @@ public class CommonUtil {
 		return averageRate;
 	}
 	
+	/**
+	 * 
+	 * min rate를 가져온다.
+	 * 반복되는 코드가 발생했다?!! 하지만 어쩔수 없다!
+	 * @param rate
+	 * @return double
+	 */
+	public static double getMinRate(String rate) {
+		// 1. 대출이자 전액인 넘을 먼저 처리하자.
+		if(rate.contains("전액")) {
+			return Double.valueOf(100);
+		}
+		
+		String[] rateArray = rate.split("~");
+		
+		double minRate;
+		
+		// 1보다 크다면 2개가 존재
+		if(rateArray.length > 1) {
+			minRate = Double.valueOf(rateArray[0].replace("%", "").trim());
+		} else {
+			minRate = Double.valueOf(rateArray[0].replace("%", "").trim());
+		}
+		return minRate;
+	}
 //	public static void main(String[] args) {
 //		
 //		String a = "추천금액";

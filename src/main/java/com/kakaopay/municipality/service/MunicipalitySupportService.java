@@ -2,6 +2,8 @@ package com.kakaopay.municipality.service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.kakaopay.municipality.model.MunicipalitySupport;
 import com.kakaopay.municipality.model.dto.MunicipalityNameDto;
 import com.kakaopay.municipality.model.dto.MunicipalityNamesDto;
+import com.kakaopay.municipality.model.dto.RecommandInstituteDto;
+import com.kakaopay.municipality.model.dto.RecommandInstitutesDto;
 import com.kakaopay.municipality.model.dto.ResponseDto;
 import com.kakaopay.municipality.repository.MunicipalitySupportRepository;
 import com.kakaopay.util.CommonUtil;
@@ -152,4 +156,35 @@ public class MunicipalitySupportService {
 		return Mono.just(MunicipalityNamesDto.builder().municipalityNames(municipalityNames).build());
 	}
 
+	/**
+	 * 그냥 단순하게 rate가 가장 낮은 추천 기관을 가져오는 것인가?
+	 * 근데 동일한 녀석이 있으면 난감...
+	 * 애매한게 
+	 * @return Mono<RecommandInstitute>
+	 */
+	public Mono<RecommandInstitutesDto> findByMinRateRecommandInstitutes() {
+		
+		List<MunicipalitySupport> municipalitySupports = municipalitySupportRepository.findAll();
+		
+		// 리스트를 가져와서 groupingBy를 이용해서 minRate를 키값으로 값는 Map을 생성한다.
+		Map<Double, List<RecommandInstituteDto>> map = municipalitySupports.stream().map(municipalitySupport -> 
+																		   {
+													
+																			double minRate = CommonUtil.getMinRate(municipalitySupport.getRate());
+																			return RecommandInstituteDto.builder()
+																									 .recommandInstitute(municipalitySupport.getRecommandInstitute())
+																									 .minRate(minRate).build();
+			
+																			}).collect(Collectors.groupingBy(RecommandInstituteDto::getMinRate));
+		// key로 정렬하기 위해서 다음과 같은 작업을 하자...
+		// TreeMap은 기본적으로 key값을 오른차순으로..
+		Map<Double, List<RecommandInstituteDto>> treeMap = new TreeMap<Double, List<RecommandInstituteDto>>(map);
+		String recommandInstitutes = treeMap.values().stream()
+													 .map(list -> list.stream().map(recommandInstitute -> recommandInstitute.getRecommandInstitute()).collect(Collectors.joining(", ")) )
+													 .findAny().orElse("");
+	
+		return Mono.just(RecommandInstitutesDto.builder().recommandInstitutes(recommandInstitutes).build());
+		
+	}
+	
 }

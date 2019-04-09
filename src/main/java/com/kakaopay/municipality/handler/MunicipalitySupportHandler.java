@@ -9,6 +9,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import com.kakaopay.municipality.model.MunicipalitySupport;
 import com.kakaopay.municipality.model.dto.MunicipalityNamesDto;
+import com.kakaopay.municipality.model.dto.RecommandInstitutesDto;
 import com.kakaopay.municipality.model.dto.ResponseDto;
 import com.kakaopay.municipality.service.MunicipalitySupportService;
 import com.kakaopay.util.PageCheckUtil;
@@ -88,5 +89,15 @@ public class MunicipalitySupportHandler {
 		Mono<MunicipalityNamesDto> mono = municipalitySupportService.findByMunicipalitySupportDesc(Integer.valueOf(request.pathVariable("count")));
 		return ServerResponse.ok().contentType(APPLICATION_JSON).body(mono, MunicipalityNamesDto.class);
 	}
+	
+	/**
+	 *  이차 보전율이 가장 낮은 추천기관 검색
+	 * @param request
+	 * @return Mono<ServerResponse>
+	 */
+	public Mono<ServerResponse> getByMinRateRecommandInstitute(ServerRequest request) {
+		return ServerResponse.ok().contentType(APPLICATION_JSON).body(municipalitySupportService.findByMinRateRecommandInstitutes(), RecommandInstitutesDto.class);
+	}
+	
 	
 }

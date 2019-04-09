@@ -37,7 +37,8 @@ public class RouteConfigration implements WebFluxConfigurer {
 		        			  .andRoute(GET("/api/v1/municipalitys/support/withpage"), municipalitySupportHandler::getMunicipalitySupportListWithPaging)
 		        			  .andRoute(GET("/api/v1/municipalitys/support/name"), municipalitySupportHandler::getByMunicipalityName)
 		        			  .andRoute(PATCH("/api/v1/municipalitys/support"), municipalitySupportHandler::updateMunicipalitySupport)
-		        			  .andRoute(GET("/api/v1/municipalitys/limits/{count}"), municipalitySupportHandler::getByMunicipalitySupportDesc);
+		        			  .andRoute(GET("/api/v1/municipalitys/support/limits/{count}"), municipalitySupportHandler::getByMunicipalitySupportDesc)
+		        			  .andRoute(GET("/api/v1/municipalitys/support/rate/min"), municipalitySupportHandler::getByMinRateRecommandInstitute);
     }
 	
     /**
