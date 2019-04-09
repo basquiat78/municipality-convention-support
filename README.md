@@ -26,9 +26,9 @@
 
 ```
 
-## API Specification
+# API Specification
 
-### 1. CSV File Upload And DB
+## 1. CSV File Upload And DB
 
 어플리케이션이 실행될때 특정 폴더에 파일을 넣고 DB에 넣는 방식보다는 뷰를 통해서 파일을 업로드하고 그것을 DB에 넣는 방식을 취함
 
@@ -44,15 +44,17 @@
 
 create, update (과제엔 주어지지 않았지만)인해 MunicipalitySupport이 Municipality와의 연관관계에서 주인이 되어야 하니 OneToOne은 MunicipalitySupport쪽에 걸어두고  MunicipalitySupport정보에 Municipality정보를 담아서 List로 반환하고 saveAll를 통해 전체 데이터를 저장한다.    
 
-### Usage
+### 1.3 Usage
 
 [http://localhost:8080/view/upload](http://localhost:8080/view/upload)
 
 테스트 코드를 위해서 관련 파일은 프로젝트 내부의 testfiles에 저장함
 
-### 2. 지원하는 지자체 목록 검색 API
+## 2. 지원하는 지자체 목록 검색 API
 
 특별히 paging과 관련된 조건이 없지만 paging처리된 api와 처리되지 않은 api를 작성함     
+
+### 2.1 Usage
 
 with paging [http://localhost:8080/api/v1/municipalitys/support/withpage?page=2&size=10](http://localhost:8080/api/v1/municipalitys/support/withpage?page=2&size=10)
 
