@@ -115,3 +115,28 @@ JAVA8 스트림 API의 sort를 통해서 비교를 한다.
 ### 6. Usage
 
 [http://localhost:8080/api/v1/municipalitys/support/rate/min](http://localhost:8080/api/v1/municipalitys/support/rate/min)
+
+# At A Glance
+
+이전에 Type Script와 nodeJs로 되어 있는 서버를 요청에 의해 자바로 바꾸는 작업을 한 적이 있다.
+비동기 서버에 대한 정보를 찾다가 WebFlux의 존재를 알게 되었다.
+이 때가 대충 2018년 6월인가 7월 중순으로 기억한다. 리액티브 프로그래밍에 대한 관심과 간지나는 방식이 맘에 들어 간혹 필요하면 webFlux을 사용했다.
+
+컨트롤러에 대해 두가지 방식을 제공하는데 기존의 @RestController 방식으로 하는 것과 Functional Endpoints방식을 지원한다.
+
+
+아마도 nodeJs를 해봤다면 Functional Endponts방식이 많이 비슷하다는 것을 알 수 있는데 사실 이 방식을 쓰다보면 기존의 방식과는 좀 달라서 애를 먹는다.
+
+일단 기존 방식의 컨트롤러 방식에서 사용할 수 있는 막강하고 다양한 어노테이션을 사용하기 모호해진다.   
+
+또한 webFlux를 사용하기 위해서는 전체적인 로직의 흐름이 비동기여야한다. 하지만 지금같은 프로젝트에서 H2를 사용하게 되면 인 메모리 디비라고 해도 I/O가 발생하는데 이게 기본적으로 Block I/O라는 것이다.
+
+스프링 진형에서는 WebFlux와 연계된 MongoDB관련 라이브러리를 제공하니 과제를 검토할 분에게 '나는 이런 걸 썼으니 검토하고 테스트하기 위해서는 본인 컴터에 noSql같은 MongoDB를 까세요'라고 하는 것도 예의에 어긋나기도 하고...
+
+물론 com.github.davidmoten:rxjava2-jdbc 이런 넘이 존재해서 논블로킹 방식을 제공한다는데...(어떻게???)
+
+이 방법을 쓰게 되면 jpa는 쓸 수 없다. native SQL를 써야하니깐...
+
+하지만 그럼에도 언젠가는 기존의 전통적인 RDBMS 벤더들이 이와 관련된 방식을 제공하지 않을까 라는 기대감을 가지고 써본다.
+
+
