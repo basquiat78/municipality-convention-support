@@ -72,4 +72,6 @@ RESTful API url을 예를 들면 http://localhost:8080/api/v1/municipalitys/{nam
 
 [http://localhost:8080/api/v1/municipalitys/support/name](/api/v1/municipalitys/support/name)
 
-![실행이미지](https://github.com/basquiat78/municipality-convention-support/blob/master/img/2.PNG)
+![실행이미지](https://github.com/basquiat78/municipality-convention-support/blob/master/img/2.2.PNG)
+
+Like검색 조건을 두어서 리스트로 나올 수 있음
