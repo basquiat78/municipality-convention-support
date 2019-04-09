@@ -48,5 +48,16 @@ create, update (과제엔 주어지지 않았지만)인해 MunicipalitySupport�
 
 [http://localhost:8080/view/upload](http://localhost:8080/view/upload)
 
+테스트 코드를 위해서 관련 파일은 프로젝트 내부의 testfiles에 저장함
+
+### 2. 지원하는 지자체 목록 검색 API
+
+특별히 paging과 관련된 조건이 없지만 paging처리된 api와 처리되지 않은 api를 작성함     
+
+with paging [http://localhost:8080/api/v1/municipalitys/support/withpage?page=2&size=10](http://localhost:8080/api/v1/municipalitys/support/withpage?page=2&size=10)
+
+queryParam을 아무것도 주지 않으면 기본적으로 page=1&size=10로 보여준다.
+
+without pagin [http://localhost:8080/api/v1/municipalitys/support](http://localhost:8080/api/v1/municipalitys/support)
 
 
