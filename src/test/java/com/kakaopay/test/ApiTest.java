@@ -42,6 +42,8 @@ import reactor.test.StepVerifier;
  * 
  * 5. 출력 개수를 보내면 조건에 맞는 municipalityNames를 가져온다.
  * 
+ * 6. 2차 보전이 minRate인 추천 기관 가져오기
+ * 
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -203,13 +205,33 @@ public class ApiTest {
 		// 조건 입출력 개수를 2개로 제한해 보자
 		// 실제 기대되는 값은 municipalityNames: "경기도, 제주도"이다.
 		webTestClient.get()
-					 .uri("/api/v1/municipalitys/limits/{count}", 2)
+					 .uri("/api/v1/municipalitys/support/limits/{count}", 2)
 					 .exchange()
 					 .expectStatus().isOk()
 					 .expectHeader().contentType(MediaType.APPLICATION_JSON)
 					 .expectBody()
 					 //.jsonPath("$.municipalityNames").isEqualTo("경기도, 제주도1111") java.lang.AssertionError: JSON path "$.municipalityNames" expected:<경기도, 제주도111> but was:<경기도, 제주도>
 					 .jsonPath("$.municipalityNames").isEqualTo("경기도, 제주도");
+		
+	}
+	
+	/**
+	 * 
+	 * 2차 보전이 minRate인 추천 기관 가져오기
+	 * 
+	 */
+	@Test
+	public void apiTest6() {
+
+		// 실제 기대되는 값은 recommandInstitutes: "금천구"이다.
+		webTestClient.get()
+					 .uri("/api/v1/municipalitys/support/rate/min")
+					 .exchange()
+					 .expectStatus().isOk()
+					 .expectHeader().contentType(MediaType.APPLICATION_JSON)
+					 .expectBody()
+					 //.jsonPath("$.recommandInstitutes").isEqualTo("금천구1") java.lang.AssertionError: JSON path "$.recommandInstitutes" expected:<금천구1> but was:<금천구>
+					 .jsonPath("$.recommandInstitutes").isEqualTo("금천구");
 		
 	}
 	
