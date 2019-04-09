@@ -109,7 +109,7 @@ JAVA8 스트림 API의 sort를 통해서 비교를 한다.
 ## 6. 이차보전 컬럼에서 보전 비율이 가장 작은 추천 기관명을 출력하는 API
 
 5번과 마찬가지라고 생각했지만 생각해보면 minRate가 같은 녀석이 존재할 수 있다는 것이다.    
-따라서 전체 목록을 가져와서 Stream Api를 이용해서 groupingBy를 이용해 minRate를 갖는 TreeMap을 생성하고 list로 반환한다. 오름 차순이니 limit를 걸어서 맨 처음것만 가져온다.    
+따라서 전체 목록을 가져와서 Stream Api를 이용해서 groupingBy를 이용해 minRate를 갖는 TreeMap을 생성하고 list로 반환한다. 오름 차순이니 findFirst로 최종연산으로 맨 처음것만 가져오고 종료한다.    
 리스트를 돌면서 해당 추천 기관명을 joining해서 Dto에 담아서 내보낸다.
 
 ### 6. Usage
