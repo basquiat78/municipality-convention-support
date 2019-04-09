@@ -70,8 +70,22 @@ RESTful API url을 예를 들면 http://localhost:8080/api/v1/municipalitys/{nam
 
 ### 3.1 Usage
 
-[http://localhost:8080/api/v1/municipalitys/support/name](/api/v1/municipalitys/support/name)
+[http://localhost:8080/api/v1/municipalitys/support/name](http://localhost:8080/api/v1/municipalitys/support/name)
 
 ![실행이미지](https://github.com/basquiat78/municipality-convention-support/blob/master/img/2.2.PNG)
 
 Like검색 조건을 두어서 리스트로 나올 수 있음
+
+## 4. 지원하는 지자체 정보 수정 기능 API
+
+PATCH로 설정해서 Update를 수행한다. 예제대로라면 id가 출력화면에 없기 때문에 일일이 비교를 해서 해당 row를 정확하게 업데이트하는게 맞을 것이다.
+하지만 가장 정확한건 유니크한 id를 통해서 업데이트하는것이 가장 좋은 방법이라 생각한다.
+
+### 4.1 Usage
+
+[http://localhost:8080/api/v1/municipalitys/support](http://localhost:8080/api/v1/municipalitys/support)
+
+![실행이미지](https://github.com/basquiat78/municipality-convention-support/blob/master/img/4.PNG)
+
+
+https://github.com/basquiat78/municipality-convention-support/blob/master/img/4.PNG
