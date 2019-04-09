@@ -100,7 +100,7 @@ JAVA8 스트림 API의 sort를 통해서 비교를 한다.
 
 3개만 추출하도록 호출
 
-[http://localhost:8080/api/v1/municipalitys/support/limits/3](http://localhost:8080/api/v1/municipalitys/limits/3)
+[http://localhost:8080/api/v1/municipalitys/support/limits/3](http://localhost:8080/api/v1/municipalitys/support/limits/3)
 
 이것은 pathVariable로 조회하는 방식으로 작성함
 
