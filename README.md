@@ -86,6 +86,20 @@ PATCH로 설정해서 Update를 수행한다. 예제대로라면 id가 출력화
 [http://localhost:8080/api/v1/municipalitys/support](http://localhost:8080/api/v1/municipalitys/support)
 
 ![실행이미지](https://github.com/basquiat78/municipality-convention-support/blob/master/img/4.PNG)
+ 
+업데이트가 수행되고 난 이후에 해당 아이디로 다시 조회를 해서 정보를 내려주는 방식을 취한다.
 
+## 5. 지원한도 컬럼에서 지원금액으로 내림차순 정렬(지원금액이 동일하면 이차보전 평균 비율이 적은 순서)하여 특정 개수만 출력하는 API 
 
-https://github.com/basquiat78/municipality-convention-support/blob/master/img/4.PNG
+비교해야하는 컬럼들이 정규화된 데이터가 아니기 때문에 조건에 부합하는 방식으로 지원 한도와 이차 보전의 정보를 유의미하게 변환한다.
+JAVA8 스트림 API의 sort를 통해서 비교를 한다.     
+
+처음에는 지원 한도로 sort를 한다. 기본적으로 내림차순이기 때문에 API로 제공하는 방식으로 오름차순으로 정렬하고 체인 메소드롤 통해서 지원 한도가 같은 경우 이차 보전 정보로 내림차순해서 정렬을 하고 limit를 통해 입력받은 수만 municiplityName들을 조합해서 화면에 보여준다.
+
+### 5.1 Usage
+
+3개만 추출하도록 호출
+
+[http://localhost:8080/api/v1/municipalitys/limits/3](http://localhost:8080/api/v1/municipalitys/limits/3)
+
+이것은 pathVariable로 조회하는 방식으로 작성함
